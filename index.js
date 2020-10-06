@@ -25,7 +25,7 @@ module.exports = function(map, options) {
                     } else {
                         replacement = basename.split('.');
                         replacement.pop();
-                        replacement = replacement.join('.').replace(/[^a-zA-Z0-9_-]+/g, '_');
+                        replacement = replacement.join('.').toLowerCase().replace(/[^a-z0-9_]+/g, '_');
                     }
 
                     // Important: $ is a special char inside the 2. argument of 
