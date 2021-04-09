@@ -1,7 +1,7 @@
 var es = require('event-stream');
 var stream = require('stream');
 var istextorbinary = require('istextorbinary');
-var re = /(=|url\()(["'`]?){1}(?!\/\/)([a-z0-9_\/.-]+\.[a-z0-9]+)(?:[#?].+?)?\2/gim;
+var re = /(=|url\()(["'`]?){1}(?!\/\/)([a-z0-9_\/.-@]+\.[a-z0-9]+)(?:[#?].+?)?\2/gim;
 
 module.exports = function(map, options) {
     var doCMSReplace = function(file, callback) {
@@ -28,11 +28,11 @@ module.exports = function(map, options) {
                         replacement = replacement.join('.').toLowerCase().replace(/[^a-z0-9_]+/g, '_');
                     }
 
-                    // Important: $ is a special char inside the 2. argument of 
+                    // Important: $ is a special char inside the 2. argument of
                     // String.replace.
-                    // To insert a normal $ sign "$$" needs to be used to escape 
+                    // To insert a normal $ sign "$$" needs to be used to escape
                     // the second $.
-                    // Additionally, because the result of this replacement will 
+                    // Additionally, because the result of this replacement will
                     // be used again for another replacement it is neccessary to
                     // escape the $ sign twice.
                     replacement = match[0].replace(match[3], '$$$$CMS_REF(media:"' + replacement + '")$$$$');
